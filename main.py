@@ -1,6 +1,7 @@
 import os
 import random
 import speech_recognition
+import time
 
 sr = speech_recognition.Recognizer()
 sr.pause_threshold = 0.5
@@ -15,13 +16,14 @@ commands_dict = {
 }
 
 
-def listen_command():    
+def listen_command():  
+    os.system('clear')  
     try:
         with speech_recognition.Microphone() as mic:
-            #sr.adjust_for_ambient_noise(source=mic, duration=0.5)
+            os.system('clear')
+            sr.adjust_for_ambient_noise(source=mic, duration=1)
             audio = sr.listen(source=mic)
             query = sr.recognize_google(audio_data=audio, language='ru-RU').lower()
-            
         return query
     except speech_recognition.UnknownValueError:
         return 'Damn... Не понял что ты сказал :/'
@@ -30,6 +32,7 @@ def listen_command():
 
 
 def greeting():    
+    os.system('clear')
     return 'Привет мой повелитель =) мяу'
 
 
@@ -56,28 +59,34 @@ def play_music():
 
 
 def stop_bot():
+    global i
     i = 0
 
 
 
 i = 1
 
-while i == 1:
-    query = listen_command()
-    
-    for k, v in commands_dict['commands'].items():
-        if query in v:
-            print(globals()[k]())
-
 
 
 def main():
+    os.system('clear') 
+
     query = listen_command()
     
     for k, v in commands_dict['commands'].items():
         if query in v:
+            os.system('clear') 
             print(globals()[k]())
+
+    time.sleep(5)
+    return 
         
+
+while i == 1:
+    os.system('clear') 
+    main()
+
+
 
 #if __name__ == '__main__':
 #    main()
